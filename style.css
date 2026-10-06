@@ -1,0 +1,96 @@
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: aquamarine;
+    color: black;
+    line-height: 1.5;
+    font-family: monospace;
+    font-size: 18px;
+}
+
+header {
+    background-color: rgb(145, 56, 56);
+    color: white; 
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+main {
+    max-width: 700px;
+    margin: 20px auto; 
+    padding: 0 15px;    
+}
+
+section {
+    background-color: white; 
+    border-radius: 8px;      
+    padding: 20px;
+    margin-bottom: 20px;     
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+}
+
+footer {
+    background-color: lightcoral;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+    width: 100%;
+}
+
+#note-form {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px;       
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+button {
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #333;
+    color: white;
+}
+
+#error-message {
+    color: red;
+    font-weight: bold;
+}
+
+.note-card {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    background-color: #fff;
+}
+
+.category-personal {
+    border-left: 6px solid teal;
+}
+
+.category-work {
+    border-left: 6px solid darkred;
+}
+
+.category-study {
+    border-left: 6px solid blue;
+}
+
+@media (max-width: 600px) {
+    #note-form {
+        flex-direction: column;
+        align-items: stretch; 
+    }
+}
