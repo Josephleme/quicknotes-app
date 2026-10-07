@@ -19,10 +19,10 @@ function saveNotes() {
 
 notes = loadNotes();
 
-function render() {
+function render(notesToRender = notes) {
     notesList.innerHTML = "";
 
-    notes.forEach(note => {
+    notesToRender.forEach(note => {
         const li = document.createElement("li");
         li.classList.add("note-card");
 
@@ -58,6 +58,14 @@ function render() {
         li.appendChild(deleteBtn);
         notesList.appendChild(li);
     });
+    if (notesToRender.length === 0 && notes.length > 0) {
+        const noResultsLi = document.createElement("li");
+        noResultsLi.textContent = "No notes match your search.";
+        noResultsLi.style.color = "#666";
+        noResultsLi.style.fontStyle = "italic";
+        notesList.appendChild(noResultsLi);
+    }
+
     if (notes.length === 0) {
         noteCount.textContent = "You have no notes yet.";
     } else if (notes.length === 1) {
@@ -107,6 +115,12 @@ noteForm.addEventListener("submit", (event) => {
     
     noteInput.value = "";
     noteInput.focus();
+});
+
+searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase();
+    const filteredNotes = notes.filter(note => note.text.toLowerCase().includes(query));
+    render(filteredNotes);
 });
 
 render();
