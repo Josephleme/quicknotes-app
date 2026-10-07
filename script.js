@@ -50,6 +50,7 @@ function render() {
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete";
         deleteBtn.style.marginLeft = "10px";
+        deleteBtn.addEventListener("click", () => deleteNote(note.id));
 
         li.appendChild(textSpan);
         li.appendChild(categoryLabel);
@@ -57,6 +58,19 @@ function render() {
         li.appendChild(deleteBtn);
         notesList.appendChild(li);
     });
+    if (notes.length === 0) {
+        noteCount.textContent = "You have no notes yet.";
+    } else if (notes.length === 1) {
+        noteCount.textContent = "You have 1 note.";
+    } else {
+        noteCount.textContent = `You have ${notes.length} notes.`;
+    }
+}
+
+function deleteNote(id) {
+    notes = notes.filter(note => note.id !== id);
+    saveNotes();
+    render();
 }
 
 noteForm.addEventListener("submit", (event) => {
@@ -65,7 +79,17 @@ noteForm.addEventListener("submit", (event) => {
     const text = noteInput.value.trim();
     const category = noteCategory.value;
     
-    if (text === "") return;
+    if (text === "") {
+        errorMessage.textContent = "Please type a note first.";
+        return;
+    }
+    
+    if (text.length > 200) {
+        errorMessage.textContent = "Notes must be 200 characters or fewer.";
+        return;
+    }
+    
+    errorMessage.textContent = "";
     
     const now = new Date();
     const timestamp = now.toLocaleString();
